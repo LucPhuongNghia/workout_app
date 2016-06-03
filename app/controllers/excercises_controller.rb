@@ -22,9 +22,22 @@ class ExcercisesController < ApplicationController
        end
     end
     
-    def show
-       
+    def edit
     end
+    
+    def update
+       if @excercise.update(excercise_params) 
+          flash[:success] = 'Excercise has been updated'
+          redirect_to [current_user, @excercise]
+       else
+          flash[:danger] = 'Excercise has not been updated'
+          render :edit
+       end
+    end
+    
+    def show
+    end
+    
     
     private
         def excercise_params
