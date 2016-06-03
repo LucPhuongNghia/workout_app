@@ -3,7 +3,7 @@ class ExcercisesController < ApplicationController
     before_action :set_excercise, except: [:index, :new, :create]
     
     def index
-        
+        @excercises = current_user.excercises.all
     end
     
     def new 

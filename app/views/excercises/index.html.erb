@@ -1,3 +1,37 @@
 <div class='col-md-8 col-xs-12'>
+    <% unless @excercises.empty? %>
+    
+    <h1>Listing Excercises</h1>
+        <table class='table table-striped'>
+            <thead>
+                <tr>
+                    <th>Duration (min)</th>
+                    <th>Workout details</th>
+                    <th>Activity date</th>
+                    <th colspan='3'></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @excercises.each do |excercise| %>
+                    <tr>
+                        <td><%= excercise.duration_in_min %></td>
+                        <td><%= truncate(excercise.workout, length: 100) %></td>
+                        <td><%= excercise.workout_date %></td>
+                        <td><%= link_to 'Show', [current_user, excercise] %></td>
+                        <td><%= link_to 'Edit', [:edit, current_user, excercise] %></td>
+                        <td><%= link_to "Delete", [current_user, excercise], method: :delete, data: {confirm: "Sure?"} %></td>
+                    </tr>
+                <% end %>
+                
+            </tbody>
+        </table>    
+    <% else %>
+        <div class='alert alert-danger message-font text-center'>
+            No workout yet
+        </div>
+    
+    <% end %>
     <%= link_to 'New Workout', new_user_excercise_path(current_user), class: 'btn btn-primary link' %> 
+    
+    <%= content_tag :div, '', id: 'chart', data: {workouts: @excercises} %>
 </div>
