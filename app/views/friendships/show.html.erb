@@ -1,0 +1,31 @@
+<div class='col-md-8'>
+    <p id='notice'><%= notice %></p>
+    <h1><%= @friend.full_name %>'s Excercises </h1>
+    
+    <table class='table table-striped'>
+        <thead>
+            <tr>
+                <th>Duration (min)</th>
+                <th>Workout Details</th>
+                <th>Activity Date</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <% @excercises.each do |excercise| %>
+                <tr>
+                    <td><%= excercise.duration_in_min %></td>
+                    <td><%= truncate(excercise.workout, length: 100) %></td>
+                    <td><%= excercise.workout_date %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+    <br />
+    <%= content_tag :div, "", id: "chart", data: {workouts: @excercises} %>
+    
+    <br>
+    <%= link_to "Back", user_excercises_path(current_user), class: 'btn btn-primary link' %>
+
+</div>
